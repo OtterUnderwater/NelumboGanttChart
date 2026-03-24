@@ -1,13 +1,13 @@
-﻿using System;
+﻿using DiagramApp.Helpers;
+using DiagramApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows;
-using DiagramApp.Models;
-using DiagramApp.Helpers;
-using System.Threading.Tasks;
 
 namespace DiagramApp.Services
 {
@@ -26,20 +26,20 @@ namespace DiagramApp.Services
         private Brush grayColor = new SolidColorBrush(Color.FromArgb(80, 200, 200, 200));
         // Данные
         private List<PersonTasksGroup> _currentData;
+        private TaskRepository _taskRepository;
         #endregion
 
-        public GanttChart(ItemsControl personNamesPanel, Canvas ganttCanvas, Canvas dateHeaderCanvas)
+        public GanttChart(ItemsControl personNamesPanel, Canvas ganttCanvas, Canvas dateHeaderCanvas, TaskRepository taskRepository)
         {
             _personNamesPanel = personNamesPanel;
             _ganttCanvas = ganttCanvas;
             _dateHeaderCanvas = dateHeaderCanvas;
+            _taskRepository = taskRepository;
         }
 
         public void Build(DateTime startDate, DateTime endDate)
         {
-            // Для теста
-            //_currentData = CreateTest.GetTestPersonTasks(startDate, endDate);
-            _currentData = TaskRepository.GetTasksInDateRange(startDate, endDate);
+            _currentData = _taskRepository.GetTasksInDateRange(startDate, endDate);
 
             if (!_currentData.Any())
             {
@@ -301,7 +301,7 @@ namespace DiagramApp.Services
         }
 
         private double GetXPosition(DateTime date, DateTime startDate) => (date - startDate).Days * DayWidth;
- 
+
         private double GetWidth(DateTime start, DateTime? end, DateTime chartStart, DateTime chartEnd)
         {
             // Если end == null, используем текущую дату

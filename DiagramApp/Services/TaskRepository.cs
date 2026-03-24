@@ -1,39 +1,40 @@
-﻿using System;
+﻿using DiagramApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography;
-using System.Windows;
-using DiagramApp.Models;
 
 namespace DiagramApp.Services
 {
     public class TaskRepository
     {
+        private string _connection;
+        private int _regId;
+        public TaskRepository(string connection, int regId)
+        {
+            _connection = connection;
+            _regId = regId;
+        }
+
         /// <summary>
         /// Получение всех задач
         /// </summary>
         /// <returns></returns>
-        public static List<PersonTasksGroup> GetTasks()
+        public List<PersonTasksGroup> GetTasks()
         {
-            int regId = 174967;
-
             List<PersonTasksGroup> groupedTasks = new List<PersonTasksGroup>();
             Dictionary<string, List<TaskInfo>> tasksByPerson = new Dictionary<string, List<TaskInfo>>();
 
-            using (SqlConnection connection = new SqlConnection("server=MB-FW5T1RUAHO2Z;database=box001;uid=se;pwd=wd;"))
+            using (SqlConnection connection = new SqlConnection(_connection))
             {
                 using (SqlCommand command = new SqlCommand("dbo.obc_Task", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
                     // Добавляем параметры
-                    command.Parameters.AddWithValue("@RegID", regId);
+                    command.Parameters.AddWithValue("@RegID", _regId);
                     command.Parameters.AddWithValue("@ActionID", 1);
 
                     connection.Open();
@@ -100,7 +101,7 @@ namespace DiagramApp.Services
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
-        public static List<PersonTasksGroup> GetTasksInDateRange(DateTime startDate, DateTime endDate)
+        public List<PersonTasksGroup> GetTasksInDateRange(DateTime startDate, DateTime endDate)
         {
             var allTasks = GetTasks();
             var result = new List<PersonTasksGroup>();

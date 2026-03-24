@@ -1,12 +1,11 @@
 ﻿using DiagramApp.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace DiagramApp.Helpers
 {
-    public static class TaskColorHelper
+    public class TaskColorHelper
     {
         /// <summary>
         /// Определяет цвет задачи в зависимости от статуса и дат
@@ -45,11 +44,11 @@ namespace DiagramApp.Helpers
             }
 
         }
-       
-    /// <summary>
-    /// Обновляет цвета для задач в сгруппированных данных
-    /// </summary>
-    public static void UpdateTasksColorsForGroups(List<PersonTasksGroup> groups)
+
+        /// <summary>
+        /// Обновляет цвета для задач в сгруппированных данных
+        /// </summary>
+        public static void UpdateTasksColorsForGroups(List<PersonTasksGroup> groups)
         {
             foreach (var group in groups)
             {

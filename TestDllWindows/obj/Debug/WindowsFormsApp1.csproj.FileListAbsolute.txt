@@ -1,0 +1,13 @@
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\bin\Debug\DiagramApp.dll
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\bin\Debug\DiagramApp.pdb
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\obj\Debug\WindowsF.A1EEDF9B.Up2Date
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\bin\Debug\DiagramApp.WinForms.dll
+C:\Users\Prog01\Desktop\proj\WindowsFormsApp1\bin\Debug\DiagramApp.WinForms.pdb
