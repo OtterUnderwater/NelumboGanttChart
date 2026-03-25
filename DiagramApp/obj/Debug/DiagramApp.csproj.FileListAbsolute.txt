@@ -24,3 +24,4 @@ C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.c
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.csproj.CoreCompileInputs.cache
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.dll
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.pdb
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\GeneratedInternalTypeHelper.g.cs

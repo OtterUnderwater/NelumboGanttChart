@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DiagramApp"
+             xmlns:local="clr-namespace:DiagramApp" 
+             xmlns:conv="clr-namespace:DiagramApp.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-    <!-- Title="Диаграмма Ганта"  WindowStartupLocation="CenterScreen" -->
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <conv:BoolToExpandIconConverter x:Key="BoolToExpandIcon" />
+    </UserControl.Resources>
+    
     <Grid HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -46,7 +50,7 @@
                  Height="30"
                  Background="#007ACC"
                  Click="BuildButton_Click"
-                 Content="Создать диаграмму"
+                 Content="Сформировать отчет"
                  Cursor="Hand"
                  Foreground="White" />
             </StackPanel>
@@ -106,7 +110,6 @@
             </StackPanel>
         </Border>
 
-        <!-- Фиксированные заголовки -->
         <Grid Grid.Row="2" Margin="10,0,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250" />
@@ -114,81 +117,87 @@
             </Grid.ColumnDefinitions>
 
             <!-- Заголовок левой панели -->
-            <Border
-             Grid.Column="0"
-             Height="Auto"
-             Background="#E8E8E8"
-             BorderBrush="#CCCCCC"
-             BorderThickness="0,0,1,1">
-                <TextBlock
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 FontSize="12"
-                 FontWeight="Bold"
-                 Foreground="Black"
-                 Text="Сотрудник / Задача" />
+            <Border Grid.Column="0" Height="Auto" Background="#E8E8E8"
+                    BorderBrush="#CCCCCC" BorderThickness="0,0,1,1">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontSize="12" FontWeight="Bold" Foreground="Black"
+                           Text="Сотрудник / Задача" />
             </Border>
 
             <!-- Заголовок правой панели с датами -->
-            <ScrollViewer
-             Grid.Column="1"
-             x:Name="DateHeaderScrollViewer"
-             HorizontalScrollBarVisibility="Auto"
-             VerticalScrollBarVisibility="Disabled"
-             HorizontalAlignment="Left"
-             ScrollChanged="DateHeaderScrollViewer_ScrollChanged">
-                <Border
-                 Background="#E8E8E8"
-                 BorderBrush="#CCCCCC"
-                 BorderThickness="1,0,0,1">
-                    <!-- Убираем HorizontalAlignment и используем только Canvas -->
-                    <Canvas x:Name="DateHeaderCanvas" 
-                         Height="50"
-                         Background="#E8E8E8" />
+            <ScrollViewer Grid.Column="1" x:Name="DateHeaderScrollViewer"
+                          HorizontalScrollBarVisibility="Auto" 
+                          VerticalScrollBarVisibility="Disabled"
+                          HorizontalAlignment="Left"
+                          ScrollChanged="DateHeaderScrollViewer_ScrollChanged">
+                <Border Background="#E8E8E8" BorderBrush="#CCCCCC" BorderThickness="1,0,0,1">
+                    <Canvas x:Name="DateHeaderCanvas" Height="50" Background="#E8E8E8" />
                 </Border>
             </ScrollViewer>
         </Grid>
-
-        <!-- Данные - используем Grid с независимыми скроллами -->
+        
         <Grid Grid.Row="3" Margin="10,0,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Левая колонка с именами (только вертикальный скролл) -->
-            <ScrollViewer
-             Grid.Column="0"
-             x:Name="LeftScrollViewer"
-             HorizontalScrollBarVisibility="Disabled"
-             VerticalScrollBarVisibility="Hidden"
-             ScrollChanged="LeftScrollViewer_ScrollChanged">
+            <!-- Левая колонка с группировкой -->
+            <ScrollViewer Grid.Column="0" x:Name="LeftScrollViewer"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Hidden"
+                          ScrollChanged="LeftScrollViewer_ScrollChanged">
                 <ItemsControl x:Name="PersonNamesPanel" 
-                           HorizontalAlignment="Stretch"
-                           VerticalAlignment="Top">
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Top">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
+                            <!-- Группа сотрудника -->
+                            <Border BorderBrush="#E0E0E0">
                                 <StackPanel>
-                                    <TextBlock
-                                     Margin="0,0,0,5"
-                                     Padding="5"
-                                     Background="#50C8C8C8"
-                                     FontSize="14"
-                                     FontWeight="Bold"
-                                     Text="{Binding PersonName}" />
-                                    <ItemsControl ItemsSource="{Binding Tasks}">
+                                    <!-- Заголовок сотрудника с кнопкой сворачивания -->
+                                    <Border Background="#50C8C8C8" 
+                                            Cursor="Hand"
+                                            MouseLeftButtonDown="PersonHeader_Click"
+                                            Tag="{Binding}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- Кнопка сворачивания/разворачивания -->
+                                            <TextBlock Grid.Column="0" 
+                                                       Text="{Binding IsExpanded, Converter={StaticResource BoolToExpandIcon}}"
+                                                       FontSize="14" 
+                                                       FontWeight="Bold"
+                                                       Margin="5"
+                                                       Width="20"
+                                                       HorizontalAlignment="Center"/>
+
+                                            <!-- Имя сотрудника -->
+                                            <TextBlock Grid.Column="1"
+                                                       Margin="0,5"
+                                                       FontSize="14"
+                                                       FontWeight="Bold"
+                                                       Text="{Binding PersonName}" />
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- Список задач (видим только если развернуто) отступы -->
+                                    <ItemsControl ItemsSource="{Binding Tasks}" 
+                                                  Visibility="{Binding IsExpanded, Converter={StaticResource BoolToVisibility}}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Border
-                                                 Height="30"
-                                                 Margin="0,1,0,1"
-                                                 Padding="10,0,0,0">
-                                                    <TextBlock
-                                                     VerticalAlignment="Center"
-                                                     FontSize="11"
-                                                     Text="{Binding TaskName}"
-                                                     TextTrimming="CharacterEllipsis" />
+                                                <Border Height="Auto"
+                                                        MinHeight="30"
+                                                        Padding="25,5,5,5"
+                                                        Background="Transparent">
+                                                    <TextBlock VerticalAlignment="Center"
+                                                               FontSize="11"
+                                                               TextWrapping="Wrap"
+                                                               Text="{Binding TaskName}"
+                                                               TextTrimming="CharacterEllipsis" />
                                                 </Border>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
@@ -200,17 +209,16 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <!-- Правая колонка с диаграммой (вертикальный + горизонтальный скролл) -->
-            <ScrollViewer
-             Grid.Column="1"
-             x:Name="GanttScrollViewer"
-             HorizontalScrollBarVisibility="Hidden"
-             VerticalScrollBarVisibility="Hidden"
-             ScrollChanged="GanttScrollViewer_ScrollChanged">
+            <!-- Правая колонка с диаграммой -->
+            <ScrollViewer Grid.Column="1" 
+                          x:Name="GanttScrollViewer"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Hidden"
+                          ScrollChanged="GanttScrollViewer_ScrollChanged">
                 <Canvas x:Name="GanttCanvas" 
-                     HorizontalAlignment ="Left"
-                     VerticalAlignment ="Top"
-                     Background="#FEFEFE" />
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#FEFEFE" />
             </ScrollViewer>
         </Grid>
     </Grid>

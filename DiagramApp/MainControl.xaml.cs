@@ -1,4 +1,5 @@
-﻿using DiagramApp.Services;
+﻿using DiagramApp.Models;
+using DiagramApp.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,6 +57,34 @@ namespace DiagramApp
 
             _ganttChartService.Build(startDate, endDate);
         }
+
+        private void PersonHeader_Click(object sender, MouseButtonEventArgs e)
+        {
+            var border = sender as Border;
+            var personGroup = border?.Tag as PersonTasksGroup;
+
+            if (personGroup != null)
+            {
+                // Переключаем состояние свернутости
+                personGroup.IsExpanded = !personGroup.IsExpanded;
+
+                // Обновляем диаграмму
+                if (StartDatePicker.SelectedDate.HasValue && EndDatePicker.SelectedDate.HasValue)
+                {
+                    RebuildChart();
+                }
+            }
+        }
+
+        private void RebuildChart()
+        {
+            var startDate = StartDatePicker.SelectedDate.Value;
+            var endDate = EndDatePicker.SelectedDate.Value;
+
+            // Перестраиваем диаграмму с учетом свернутых групп
+            _ganttChartService.Build(startDate, endDate);
+        }
+
 
         #region [Прокрутка диаграммы] 
 
