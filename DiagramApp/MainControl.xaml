@@ -69,43 +69,43 @@
                 <!-- Синий - Назначена -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
                     <Rectangle Width="20" Height="20" Fill="#6495ED" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
-                    <TextBlock Text="Назначена" VerticalAlignment="Center" FontSize="11" />
+                    <TextBlock Text="Назначена" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
 
                 <!-- Желтый - Исполняется (в срок) -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
                     <Rectangle Width="20" Height="20" Fill="#FFDC64" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
-                    <TextBlock Text="Исполняется" VerticalAlignment="Center" FontSize="11" />
+                    <TextBlock Text="Исполняется" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
 
                 <!-- Красный - Просрочено -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
                     <Rectangle Width="20" Height="20" Fill="#FF6464" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
-                    <TextBlock Text="Просрочено" VerticalAlignment="Center" FontSize="11" />
+                    <TextBlock Text="Просрочено" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
 
                 <!-- Зеленый - Выполнена в срок -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
                     <Rectangle Width="20" Height="20" Fill="#90EE90" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
-                    <TextBlock Text="Выполнена в срок" VerticalAlignment="Center" FontSize="11" />
+                    <TextBlock Text="Выполнена в срок" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
 
                 <!-- Ярко-зеленый - Завершена -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
                     <Rectangle Width="20" Height="20" Fill="#4CAF50" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
-                    <TextBlock Text="Завершена" VerticalAlignment="Center" FontSize="11" />
+                    <TextBlock Text="Завершена" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
 
                 <!-- Оранжевый - Пауза -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,0">
                     <Rectangle Width="20" Height="20" Fill="#FFA500" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
-                    <TextBlock Text="Пауза" VerticalAlignment="Center" FontSize="11" />
+                    <TextBlock Text="Пауза" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
 
                 <!-- Серый - Отменена -->
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20" Fill="#696969" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
-                    <TextBlock Text="Отменена" VerticalAlignment="Center" FontSize="11" />
+                    <TextBlock Text="Отменена" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
             </StackPanel>
         </Border>
@@ -192,9 +192,12 @@
                                                 <Border Height="Auto"
                                                         MinHeight="30"
                                                         Padding="25,5,5,5"
-                                                        Background="Transparent">
+                                                        Background="Transparent"
+                                                        Cursor="Hand"
+                                                        MouseLeftButtonDown="TaskName_Click"
+                                                        Tag="{Binding}">
                                                     <TextBlock VerticalAlignment="Center"
-                                                               FontSize="11"
+                                                               FontSize="12"
                                                                TextWrapping="Wrap"
                                                                Text="{Binding TaskName}"
                                                                TextTrimming="CharacterEllipsis" />

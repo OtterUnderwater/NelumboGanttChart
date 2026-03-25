@@ -1,4 +1,5 @@
-﻿using DiagramApp.Models;
+﻿using DiagramApp.Helpers;
+using DiagramApp.Models;
 using DiagramApp.Services;
 using System;
 using System.Collections;
@@ -21,16 +22,42 @@ namespace DiagramApp
     {
         private GanttChart _ganttChartService;
 
+        // Событие для перехода на экран задачи
+        public event Action<TaskInfo> TaskClicked;
+
         public MainControl(Hashtable parameters)
         {
             InitializeComponent();
 
             TaskRepository taskRepository = new TaskRepository((string)parameters["ConnectionString"], (int)parameters["RegID"]);
             _ganttChartService = new GanttChart(PersonNamesPanel, GanttCanvas, DateHeaderCanvas, taskRepository);
-
+            
             // Устанавливаем даты по умолчанию
-            StartDatePicker.SelectedDate = new DateTime(2025, 11, 3);
-            EndDatePicker.SelectedDate = new DateTime(2025, 11, 16);
+            StartDatePicker.SelectedDate = DateTime.Today;
+            EndDatePicker.SelectedDate = DateTime.Today.AddDays(14);
+        }
+
+        /// <summary>
+        /// Обработчик клика по названию задачи в левой панели
+        /// </summary>
+        private void TaskName_Click(object sender, MouseButtonEventArgs e)
+        {
+            var border = sender as Border;
+            var task = border?.Tag as TaskInfo;
+
+            if (task != null)
+            {
+                TaskNavigationHelper.OpenTask(task.RowType, task.ItemID, task.Goods_TaskID, task.ClientOrderID);
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// Обработчик клика по задаче из диаграммы
+        /// </summary>
+        private void OnTaskClicked(object sender, TaskInfo task)
+        {
+            TaskNavigationHelper.OpenTask(task.RowType, task.ItemID, task.Goods_TaskID, task.ClientOrderID);
         }
 
         /// <summary>
@@ -85,11 +112,10 @@ namespace DiagramApp
             _ganttChartService.Build(startDate, endDate);
         }
 
+    #region [Прокрутка диаграммы] 
 
-        #region [Прокрутка диаграммы] 
-
-        // Горизонталь
-        private void GanttScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    // Горизонталь
+    private void GanttScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             DateHeaderScrollViewer.ScrollToHorizontalOffset(GanttScrollViewer.HorizontalOffset);
             LeftScrollViewer.ScrollToVerticalOffset(GanttScrollViewer.VerticalOffset);
@@ -109,5 +135,4 @@ namespace DiagramApp
 
         #endregion
     }
-
 }

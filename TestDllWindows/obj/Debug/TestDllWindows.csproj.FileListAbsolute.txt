@@ -24,3 +24,5 @@ C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\TestDllWindows\obj\Debug\TestDllW
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\TestDllWindows\obj\Debug\TestDllW.E78425B9.Up2Date
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\TestDllWindows\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\TestDllWindows\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\TestDllWindows\bin\Debug\MettaFramework.dll
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\TestDllWindows\bin\Debug\stdole.dll

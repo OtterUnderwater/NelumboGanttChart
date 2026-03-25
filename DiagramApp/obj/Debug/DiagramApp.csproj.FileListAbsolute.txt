@@ -25,3 +25,6 @@ C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.c
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.dll
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.pdb
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\bin\Debug\MettaFramework.dll
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\bin\Debug\stdole.dll
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp\obj\Debug\DiagramApp.csproj.Up2Date

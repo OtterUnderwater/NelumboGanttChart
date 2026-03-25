@@ -32,8 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MettaFramework">
+      <HintPath>..\MettaFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +57,7 @@
     </Page>
     <Compile Include="Converters\BoolToExpandIconConverter.cs" />
     <Compile Include="Helpers\TaskColorHelper.cs" />
+    <Compile Include="Helpers\TaskNavigationHelper.cs" />
     <Compile Include="Models\PersonTasksGroup.cs" />
     <Compile Include="Models\TaskInfo.cs" />
     <Compile Include="Services\GanttChart.cs" />

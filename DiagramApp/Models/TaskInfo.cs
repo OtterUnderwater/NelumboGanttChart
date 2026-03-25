@@ -19,6 +19,12 @@ namespace DiagramApp.Models
         public DateTime PlanExecDate { get; set; }
         public DateTime FactStartDate { get; set; }
         public DateTime? FactExecDate { get; set; }
+
+        // Для открытия формы задачи
+        public int? RowType { get; set; }
+        public int? ItemID { get; set; }
+        public int? Goods_TaskID { get; set; }
+        public int? ClientOrderID { get; set; }
         public Brush TaskColor { get; set; } // Цвет задачи
 
         public double TaskHeight

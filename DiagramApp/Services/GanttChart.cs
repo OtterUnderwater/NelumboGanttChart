@@ -314,7 +314,7 @@ namespace DiagramApp.Services
                 var dateText = new TextBlock
                 {
                     Text = currentDate.ToString("dd.MM"),
-                    FontSize = 11,
+                    FontSize = 12,
                     Foreground = Brushes.Black,
                     FontWeight = FontWeights.Bold,
                     HorizontalAlignment = HorizontalAlignment.Center,
@@ -388,3 +388,4 @@ namespace DiagramApp.Services
         }
     }
 }
+ 

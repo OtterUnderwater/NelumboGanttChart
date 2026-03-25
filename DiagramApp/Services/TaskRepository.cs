@@ -49,6 +49,10 @@ namespace DiagramApp.Services
                         int planExecDate = reader.GetOrdinal("ToDate"); // Плановая дата выполнения задачи
                         int factStartDate = reader.GetOrdinal("FactStartDate"); // Дата начала выполнения задачи
                         int factExecDate = reader.GetOrdinal("ExecDate"); // Дата выполнения задачи
+                        int rowType = reader.GetOrdinal("RowType"); // Тип задачи
+                        int itemID = reader.GetOrdinal("ItemID");
+                        int goods_TaskID = reader.GetOrdinal("Goods_TaskID");
+                        int clientOrderID = reader.GetOrdinal("ClientOrderID");
 
                         while (reader.Read())
                         {
@@ -69,6 +73,10 @@ namespace DiagramApp.Services
                                 PlanExecDate = reader.GetDateTime(planExecDate),
                                 FactStartDate = reader.GetDateTime(factStartDate),
                                 FactExecDate = reader.IsDBNull(factExecDate) ? (DateTime?)null : reader.GetDateTime(factExecDate),
+                                RowType = reader.IsDBNull(rowType) ? (int?) null : reader.GetInt32(rowType),
+                                ItemID = reader.IsDBNull(itemID) ? (int?)null : reader.GetInt32(itemID),
+                                Goods_TaskID = reader.IsDBNull(goods_TaskID) ? (int?)null : reader.GetInt32(goods_TaskID),
+                                ClientOrderID = reader.IsDBNull(clientOrderID) ? (int?)null : reader.GetInt32(clientOrderID)
                             };
 
                             // Группируем по сотруднику

@@ -16,3 +16,5 @@ C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp.WinForms\obj\Debug\Dia
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp.WinForms\obj\Debug\DiagramA.14D117E4.Up2Date
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp.WinForms\obj\Debug\DiagramApp.WinForms.dll
 C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp.WinForms\obj\Debug\DiagramApp.WinForms.pdb
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp.WinForms\bin\Debug\MettaFramework.dll
+C:\Users\Prog01\Desktop\proj\test1\DiagramApp2\DiagramApp.WinForms\bin\Debug\stdole.dll
