@@ -19,7 +19,8 @@ namespace DiagramApp.Services
         private const double DayWidth = 40;
         private Brush grayColor = new SolidColorBrush(Color.FromArgb(80, 200, 200, 200));
 
-        private List<PersonTasksGroup> _currentData;
+        private List<PersonTasksGroup> _allData; // Все данные из БД
+        private List<PersonTasksGroup> _currentData; // Отфильтрованные данные
         private TaskRepository _taskRepository;
         private DateTime _currentStartDate;
         private DateTime _currentEndDate;
@@ -33,37 +34,79 @@ namespace DiagramApp.Services
             _taskRepository = taskRepository;
         }
 
-        public void Build(DateTime startDate, DateTime endDate)
+        // Метод для загрузки данных из БД (вызывается один раз)
+        public void LoadData(DateTime startDate, DateTime endDate)
         {
-            bool datesChanged = _currentStartDate != startDate || _currentEndDate != endDate;
+            _allData = _taskRepository.GetTasksInDateRange(startDate, endDate);
 
-            if (datesChanged || _currentData == null)
+            if (!_allData.Any())
             {
-                var newData = _taskRepository.GetTasksInDateRange(startDate, endDate);
+                MessageBox.Show("Нет задач в выбранном диапазоне дат", "Информация",
+                              MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-                if (!newData.Any())
+            TaskColorHelper.UpdateTasksColorsForGroups(_allData);
+
+            _currentStartDate = startDate;
+            _currentEndDate = endDate;
+
+            // Инициализируем состояние раскрытости для всех сотрудников (по умолчанию раскрыты)
+            foreach (var group in _allData)
+            {
+                group.IsExpanded = true;
+            }
+
+            // Показываем все данные
+            ApplyFilter(null);
+        }
+
+        // Применение фильтра по сотрудникам без перезагрузки данных
+        public void ApplyFilter(List<string> selectedPersons)
+        {
+            if (_allData == null) return;
+
+            // Фильтруем данные
+            if (selectedPersons != null && selectedPersons.Any())
+            {
+                _currentData = _allData
+                    .Where(group => selectedPersons.Contains(group.PersonName))
+                    .ToList();
+
+                if (!_currentData.Any())
                 {
-                    MessageBox.Show("Нет задач в выбранном диапазоне дат", "Информация",
+                    MessageBox.Show($"Нет задач для выбранных сотрудников в указанном диапазоне дат", "Информация",
                                   MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
-
-                TaskColorHelper.UpdateTasksColorsForGroups(newData);
-
-                _currentData = newData;
-                _currentStartDate = startDate;
-                _currentEndDate = endDate;
-
-                _personNamesPanel.ItemsSource = _currentData;
+            }
+            else
+            {
+                // Показываем всех сотрудников
+                _currentData = _allData.ToList();
             }
 
-            // Принудительно обновляем layout для получения реальных высот
+            // Сохраняем состояние раскрытости (оно уже в моделях)
+            // Обновляем отображение
+            _personNamesPanel.ItemsSource = _currentData;
             _personNamesPanel.UpdateLayout();
-
-            // Получаем актуальные высоты заголовков сотрудников и задач
             UpdateHeights();
+            RedrawChart(_currentStartDate, _currentEndDate);
+        }
 
-            RedrawChart(startDate, endDate);
+        // Метод для обновления диаграммы (сохраняем для совместимости)
+        public void Build(DateTime startDate, DateTime endDate, List<string> selectedPersons)
+        {
+            // Если даты изменились, перезагружаем данные
+            if (_currentStartDate != startDate || _currentEndDate != endDate || _allData == null)
+            {
+                LoadData(startDate, endDate);
+            }
+            else
+            {
+                // Если даты не изменились, просто применяем фильтр
+                ApplyFilter(selectedPersons);
+            }
         }
 
         private void UpdateHeights()
@@ -284,7 +327,7 @@ namespace DiagramApp.Services
                 _ganttCanvas.Children.Add(actualLine);
             }
         }
-      
+
         private void DrawDateHeaders(DateTime startDate, DateTime endDate)
         {
             int daysCount = (endDate - startDate).Days + 1;
@@ -382,10 +425,12 @@ namespace DiagramApp.Services
         {
             if (personGroup != null && _currentData != null)
             {
+                // Переключаем состояние прямо в модели
                 personGroup.IsExpanded = !personGroup.IsExpanded;
+
+                // Перерисовываем диаграмму
                 RedrawChart(_currentStartDate, _currentEndDate);
             }
         }
     }
 }
- 

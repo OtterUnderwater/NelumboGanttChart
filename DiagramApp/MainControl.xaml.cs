@@ -4,37 +4,91 @@ using DiagramApp.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DiagramApp
 {
-    public partial class MainControl : UserControl
+    public partial class MainControl : UserControl, INotifyPropertyChanged
     {
+        #region [Переменные класса]
         private GanttChart _ganttChartService;
+        private ObservableCollection<string> _listPersons;
+        private ObservableCollection<string> _selectedPersons;
+        private DateTime _currentStartDate;
+        private DateTime _currentEndDate;
 
         // Событие для перехода на экран задачи
         public event Action<TaskInfo> TaskClicked;
+
+        public ObservableCollection<string> ListPersons
+        {
+            get => _listPersons;
+            set
+            {
+                _listPersons = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<string> SelectedPersons
+        {
+            get => _selectedPersons;
+            set
+            {
+                _selectedPersons = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
         public MainControl(Hashtable parameters)
         {
             InitializeComponent();
 
+            // Устанавливаем DataContext
+            DataContext = this;
+
+            PersonRepository personRepository = new PersonRepository((string)parameters["ConnectionString"]);
             TaskRepository taskRepository = new TaskRepository((string)parameters["ConnectionString"], (int)parameters["RegID"]);
             _ganttChartService = new GanttChart(PersonNamesPanel, GanttCanvas, DateHeaderCanvas, taskRepository);
-            
+
+            // Инициализация коллекций
+            ListPersons = new ObservableCollection<string>(personRepository.GetPersons());
+            SelectedPersons = new ObservableCollection<string>();
+
             // Устанавливаем даты по умолчанию
             StartDatePicker.SelectedDate = DateTime.Today;
             EndDatePicker.SelectedDate = DateTime.Today.AddDays(14);
+
+            _currentStartDate = DateTime.Today;
+            _currentEndDate = DateTime.Today.AddDays(14);
+        }
+
+        private void PersonsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            if (listBox != null)
+            {
+                SelectedPersons.Clear();
+                foreach (string item in listBox.SelectedItems)
+                {
+                    SelectedPersons.Add(item);
+                }
+            }
+        }
+
+        private void ClearSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (PersonsListBox != null)
+            {
+                PersonsListBox.UnselectAll();
+            }
         }
 
         /// <summary>
@@ -82,9 +136,27 @@ namespace DiagramApp
                 return;
             }
 
-            _ganttChartService.Build(startDate, endDate);
+            _currentStartDate = startDate;
+            _currentEndDate = endDate;
+
+            // Обновляем диаграмму только здесь, при нажатии кнопки
+            BuildChartWithFilter();
         }
 
+        /// <summary>
+        /// Построение диаграммы с учетом выбранных сотрудников
+        /// Если никто не выбран - показываем всех
+        /// </summary>
+        private void BuildChartWithFilter()
+        {
+            // Если нет выбранных сотрудников, передаем null (будут показаны все)
+            List<string> selectedPersonsList = SelectedPersons?.Any() == true
+                ? SelectedPersons.ToList()
+                : null;
+
+            // Вызываем метод Build с фильтром по сотрудникам
+            _ganttChartService.Build(_currentStartDate, _currentEndDate, selectedPersonsList);
+        }
         private void PersonHeader_Click(object sender, MouseButtonEventArgs e)
         {
             var border = sender as Border;
@@ -95,27 +167,25 @@ namespace DiagramApp
                 // Переключаем состояние свернутости
                 personGroup.IsExpanded = !personGroup.IsExpanded;
 
-                // Обновляем диаграмму
+                // Обновляем диаграмму при сворачивании/разворачивании
                 if (StartDatePicker.SelectedDate.HasValue && EndDatePicker.SelectedDate.HasValue)
                 {
-                    RebuildChart();
+                    BuildChartWithFilter();
                 }
             }
         }
 
-        private void RebuildChart()
-        {
-            var startDate = StartDatePicker.SelectedDate.Value;
-            var endDate = EndDatePicker.SelectedDate.Value;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-            // Перестраиваем диаграмму с учетом свернутых групп
-            _ganttChartService.Build(startDate, endDate);
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-    #region [Прокрутка диаграммы] 
+        #region [Прокрутка диаграммы] 
 
-    // Горизонталь
-    private void GanttScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        // Горизонталь
+        private void GanttScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             DateHeaderScrollViewer.ScrollToHorizontalOffset(GanttScrollViewer.HorizontalOffset);
             LeftScrollViewer.ScrollToVerticalOffset(GanttScrollViewer.VerticalOffset);

@@ -61,6 +61,7 @@
     <Compile Include="Models\PersonTasksGroup.cs" />
     <Compile Include="Models\TaskInfo.cs" />
     <Compile Include="Services\GanttChart.cs" />
+    <Compile Include="Services\PersonRepository.cs" />
     <Compile Include="Services\TaskRepository.cs" />
     <Compile Include="MainControl.xaml.cs">
       <DependentUpon>MainControl.xaml</DependentUpon>

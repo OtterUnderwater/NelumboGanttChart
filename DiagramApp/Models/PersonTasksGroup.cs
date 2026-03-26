@@ -7,7 +7,6 @@ namespace DiagramApp.Models
     {
         private bool _isExpanded = false;
         private double _headerHeight = 30; // Высота заголовка сотрудника
-
         public string PersonName { get; set; }
         public List<TaskInfo> Tasks { get; set; }
 
