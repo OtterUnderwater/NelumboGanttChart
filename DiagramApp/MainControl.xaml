@@ -133,6 +133,12 @@
                     <Rectangle Width="20" Height="20" Fill="#696969" Margin="0,0,5,0" RadiusX="3" RadiusY="3" />
                     <TextBlock Text="Отменена" VerticalAlignment="Center" FontSize="12" />
                 </StackPanel>
+
+                <!-- Черный - Фактический план -->
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="40" Height="4" Fill="Black" Margin="10,0,5,0" />
+                    <TextBlock Text="Факт. длительность" VerticalAlignment="Center" FontSize="12" />
+                </StackPanel>
             </StackPanel>
         </Border>
 

@@ -1,14 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Prog01\\Desktop\\proj\\test1\\DiagramApp2\\",
+  "WorkspaceRootPath": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|c:\\users\\prog01\\desktop\\proj\\test1\\diagramapp2\\diagramapp\\maincontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|C:\\Users\\Prog01\\Desktop\\DiagramApp2\\diagramapp\\maincontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|solutionrelative:diagramapp\\maincontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|c:\\users\\prog01\\desktop\\proj\\test1\\diagramapp2\\diagramapp\\maincontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|C:\\Users\\Prog01\\Desktop\\DiagramApp2\\diagramapp\\maincontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|solutionrelative:diagramapp\\maincontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|c:\\users\\prog01\\desktop\\diagramapp2\\diagramapp\\services\\ganttchart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|solutionrelative:diagramapp\\services\\ganttchart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|C:\\Users\\Prog01\\Desktop\\DiagramApp2\\diagramapp\\models\\persontasksgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|solutionrelative:diagramapp\\models\\persontasksgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|c:\\users\\prog01\\desktop\\diagramapp2\\diagramapp\\models\\taskinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|solutionrelative:diagramapp\\models\\taskinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,17 +30,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GanttChart.cs",
+              "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Services\\GanttChart.cs",
+              "RelativeDocumentMoniker": "DiagramApp\\Services\\GanttChart.cs",
+              "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Services\\GanttChart.cs",
+              "RelativeToolTip": "DiagramApp\\Services\\GanttChart.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAuwDMAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T12:46:44.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PersonTasksGroup.cs",
+              "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Models\\PersonTasksGroup.cs",
+              "RelativeDocumentMoniker": "DiagramApp\\Models\\PersonTasksGroup.cs",
+              "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Models\\PersonTasksGroup.cs",
+              "RelativeToolTip": "DiagramApp\\Models\\PersonTasksGroup.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAcAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T09:00:10.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TaskInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Models\\TaskInfo.cs",
+              "RelativeDocumentMoniker": "DiagramApp\\Models\\TaskInfo.cs",
+              "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Models\\TaskInfo.cs",
+              "RelativeToolTip": "DiagramApp\\Models\\TaskInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T08:34:23.298Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MainControl.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\proj\\test1\\DiagramApp2\\DiagramApp\\MainControl.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\MainControl.xaml.cs",
               "RelativeDocumentMoniker": "DiagramApp\\MainControl.xaml.cs",
-              "ToolTip": "C:\\Users\\Prog01\\Desktop\\proj\\test1\\DiagramApp2\\DiagramApp\\MainControl.xaml.cs",
+              "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\MainControl.xaml.cs",
               "RelativeToolTip": "DiagramApp\\MainControl.xaml.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAowM8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAqwM8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T08:48:11.003Z",
               "EditorCaption": ""
@@ -37,9 +88,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainControl.xaml",
-              "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\proj\\test1\\DiagramApp2\\DiagramApp\\MainControl.xaml",
+              "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\MainControl.xaml",
               "RelativeDocumentMoniker": "DiagramApp\\MainControl.xaml",
-              "ToolTip": "C:\\Users\\Prog01\\Desktop\\proj\\test1\\DiagramApp2\\DiagramApp\\MainControl.xaml*",
+              "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\MainControl.xaml*",
               "RelativeToolTip": "DiagramApp\\MainControl.xaml*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-03-26T07:20:48.77Z",

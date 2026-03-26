@@ -51,12 +51,6 @@ namespace DiagramApp.Services
             _currentStartDate = startDate;
             _currentEndDate = endDate;
 
-            // Инициализируем состояние раскрытости для всех сотрудников (по умолчанию раскрыты)
-            foreach (var group in _allData)
-            {
-                group.IsExpanded = true;
-            }
-
             // Показываем все данные
             ApplyFilter(null);
         }
