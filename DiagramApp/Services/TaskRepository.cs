@@ -117,7 +117,7 @@ namespace DiagramApp.Services
             foreach (var person in allTasks)
             {
                 var filteredTasks = person.Tasks
-                    .Where(t => t.PlanStartDate >= startDate && t.PlanStartDate <= endDate)
+                    .Where(t => IsTaskInDateRange(t, startDate, endDate))
                     .ToList();
 
                 if (filteredTasks.Any())
@@ -132,5 +132,40 @@ namespace DiagramApp.Services
 
             return result;
         }
+
+        /// <summary>
+        /// Проверяет, попадает ли задача в диапазон дат (по плановым или фактическим датам)
+        /// </summary>
+        private bool IsTaskInDateRange(TaskInfo task, DateTime filterStart, DateTime filterEnd)
+        {
+            bool factIntersects = false;
+            bool planIntersects = IsDateRangeIntersects(task.PlanStartDate, task.PlanExecDate, filterStart, filterEnd);
+
+            if (task.FactExecDate.HasValue)
+            {
+                factIntersects = IsDateRangeIntersects(task.FactStartDate, task.FactExecDate.Value, filterStart, filterEnd);
+            }
+            else
+            {
+                factIntersects = task.FactStartDate <= filterEnd;
+            }
+
+            // Задача попадает в диапазон, если пересекается хотя бы один из периодов
+            return planIntersects || factIntersects;
+        }
+
+        /// <summary>
+        /// Проверяет, пересекаются ли два периода дат
+        /// </summary>
+        /// <param name="taskStart">Начало задачи</param>
+        /// <param name="taskEnd">Конец задачи</param>
+        /// <param name="filterStart">Начало фильтра</param>
+        /// <param name="filterEnd">Конец фильтра</param>
+        /// <returns>True, если периоды пересекаются</returns>
+        private bool IsDateRangeIntersects(DateTime taskStart, DateTime taskEnd, DateTime filterStart, DateTime filterEnd)
+        {
+            return taskStart <= filterEnd && taskEnd >= filterStart;
+        }
+
     }
 }
