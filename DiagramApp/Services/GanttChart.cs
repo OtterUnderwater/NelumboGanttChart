@@ -277,51 +277,66 @@ namespace DiagramApp.Services
                 }
             }
         }
-
         private void DrawTask(TaskInfo task, DateTime startDate, DateTime endDate, double y)
         {
             // Плановый период
-            double plannedLeft = GetXPosition(task.PlanStartDate, startDate);
-            double plannedWidth = GetWidth(task.PlanStartDate, task.PlanExecDate, startDate, endDate);
+            DrawPeriod(task.PlanStartDate, task.PlanExecDate, startDate, endDate, y, task.TaskHeight, task.TaskColor, isRect: true);
 
-            if (plannedWidth > 0 && plannedLeft >= 0)
+            // Фактический период
+            DrawPeriod(task.FactStartDate, task.FactExecDate, startDate, endDate, y, task.TaskHeight, Brushes.Black, isRect: false);
+        }
+
+        private void DrawPeriod(DateTime periodStart, DateTime? dateEnd, DateTime viewStart, DateTime viewEnd, double y, double height, Brush color, bool isRect)
+        {
+            DateTime periodEnd = (dateEnd.HasValue) ? dateEnd.Value : DateTime.Today;
+
+            // Проверяем пересечение периодов
+            if (periodEnd < viewStart || periodStart > viewEnd)
+                return;
+
+            // Вычисляем видимую часть периода
+            DateTime visibleStart = periodStart < viewStart ? viewStart : periodStart;
+            DateTime visibleEnd = periodEnd > viewEnd ? viewEnd : periodEnd;
+
+            // Вычисляем координаты
+            double left = GetXPosition(visibleStart, viewStart);
+            double width = GetWidth(visibleStart, visibleEnd, viewStart, viewEnd);
+
+            if (width <= 0)
+                return;
+
+            if (isRect)
             {
-                var plannedRect = new Rectangle
+                var rect = new Rectangle
                 {
-                    Width = plannedWidth,
-                    Height = task.TaskHeight,
-                    Fill = task.TaskColor,
+                    Width = width,
+                    Height = height,
+                    Fill = color,
                     RadiusX = 3,
                     RadiusY = 3,
                 };
-                Canvas.SetLeft(plannedRect, plannedLeft);
-                Canvas.SetTop(plannedRect, y);
-                _ganttCanvas.Children.Add(plannedRect);
+                Canvas.SetLeft(rect, left);
+                Canvas.SetTop(rect, y);
+                _ganttCanvas.Children.Add(rect);
             }
-
-            // Фактический период
-            double actualLeft = GetXPosition(task.FactStartDate, startDate);
-            double actualWidth = GetWidth(task.FactStartDate, task.FactExecDate, startDate, endDate);
-
-            if (actualWidth > 0 && actualLeft >= 0)
+            else
             {
-                var actualLine = new Line
+                var line = new Line
                 {
                     X1 = 0,
                     Y1 = 0,
-                    X2 = actualWidth,
+                    X2 = width,
                     Y2 = 0,
-                    Stroke = Brushes.Black,
+                    Stroke = color,
                     StrokeThickness = 3,
                 };
 
-                double verticalCenter = y + (task.TaskHeight / 2);
-                Canvas.SetLeft(actualLine, actualLeft);
-                Canvas.SetTop(actualLine, verticalCenter);
-                _ganttCanvas.Children.Add(actualLine);
+                double verticalCenter = y + (height / 2);
+                Canvas.SetLeft(line, left);
+                Canvas.SetTop(line, verticalCenter);
+                _ganttCanvas.Children.Add(line);
             }
         }
-
         private void DrawDateHeaders(DateTime startDate, DateTime endDate)
         {
             int daysCount = (endDate - startDate).Days + 1;

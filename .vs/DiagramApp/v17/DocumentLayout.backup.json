@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|C:\\Users\\Prog01\\Desktop\\DiagramApp2\\diagramapp\\services\\ganttchart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|c:\\users\\prog01\\desktop\\diagramapp2\\diagramapp\\services\\ganttchart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|solutionrelative:diagramapp\\services\\ganttchart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|c:\\users\\prog01\\desktop\\diagramapp2\\diagramapp\\services\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|C:\\Users\\Prog01\\Desktop\\DiagramApp2\\diagramapp\\services\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EDAFB7BD-64A5-4C40-8805-F28057FB7173}|DiagramApp\\DiagramApp.csproj|solutionrelative:diagramapp\\services\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,7 +28,7 @@
               "RelativeDocumentMoniker": "DiagramApp\\Services\\TaskRepository.cs",
               "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Services\\TaskRepository.cs",
               "RelativeToolTip": "DiagramApp\\Services\\TaskRepository.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAzwKQAAAB6AAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAQwKgAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T12:55:26.68Z",
               "EditorCaption": ""
@@ -39,9 +39,9 @@
               "Title": "GanttChart.cs",
               "DocumentMoniker": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Services\\GanttChart.cs",
               "RelativeDocumentMoniker": "DiagramApp\\Services\\GanttChart.cs",
-              "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Services\\GanttChart.cs",
-              "RelativeToolTip": "DiagramApp\\Services\\GanttChart.cs",
-              "ViewState": "AgIAABwBAAAAAAAAAAAqwCUBAAAfAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Prog01\\Desktop\\DiagramApp2\\DiagramApp\\Services\\GanttChart.cs*",
+              "RelativeToolTip": "DiagramApp\\Services\\GanttChart.cs*",
+              "ViewState": "AgIAACcBAAAAAAAAAAAuwCMBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T12:46:44.379Z",
               "EditorCaption": ""

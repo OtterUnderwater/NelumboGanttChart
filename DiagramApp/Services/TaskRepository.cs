@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
-using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DiagramApp.Services
 {
@@ -139,17 +139,15 @@ namespace DiagramApp.Services
         private bool IsTaskInDateRange(TaskInfo task, DateTime filterStart, DateTime filterEnd)
         {
             bool factIntersects = false;
-            bool planIntersects = IsDateRangeIntersects(task.PlanStartDate, task.PlanExecDate, filterStart, filterEnd);
-
+            bool planIntersects = IsDateRangeIntersects(task.PlanStartDate, task.PlanExecDate, filterStart, filterEnd);           
             if (task.FactExecDate.HasValue)
             {
                 factIntersects = IsDateRangeIntersects(task.FactStartDate, task.FactExecDate.Value, filterStart, filterEnd);
             }
             else
             {
-                factIntersects = task.FactStartDate <= filterEnd;
+                factIntersects = IsDateRangeIntersects(task.FactStartDate, DateTime.Today, filterStart, filterEnd);
             }
-
             // Задача попадает в диапазон, если пересекается хотя бы один из периодов
             return planIntersects || factIntersects;
         }
@@ -164,8 +162,10 @@ namespace DiagramApp.Services
         /// <returns>True, если периоды пересекаются</returns>
         private bool IsDateRangeIntersects(DateTime taskStart, DateTime taskEnd, DateTime filterStart, DateTime filterEnd)
         {
-            return taskStart <= filterEnd && taskEnd >= filterStart;
+            return Max(taskStart, filterStart) <= Min(taskEnd, filterEnd);
         }
 
+        private DateTime Max(DateTime date1, DateTime date2) => date1 > date2 ? date1 : date2;
+        private DateTime Min(DateTime date1, DateTime date2) => date1 < date2 ? date1 : date2;
     }
 }
